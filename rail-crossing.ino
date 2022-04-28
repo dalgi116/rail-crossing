@@ -3,8 +3,9 @@ const byte red1 = 11;
 const byte red2 = 10;
 const byte btn1 = 9;
 const byte btn2 = 8;
+const byte buzzer = 6;
 unsigned int redInterval = 500;
-unsigned int whiteInterval = 1000;
+unsigned int whiteInterval = 750;
 
 bool btnState1;
 bool btnState2; 
@@ -15,6 +16,7 @@ void setup() {
   pinMode(red2, OUTPUT);
   pinMode(btn1, INPUT);
   pinMode(btn2, INPUT);
+  pinMode(buzzer, OUTPUT);
 }
 
 void loop() {
@@ -49,6 +51,7 @@ void loop() {
 void blinkWhite(int interval) {
   digitalWrite(red1, LOW);
   digitalWrite(red2, LOW);
+  digitalWrite(buzzer, LOW);
   static unsigned long int counter;
   static bool state;
   
@@ -74,11 +77,13 @@ void blinkRed(int interval) {
       state = LOW;
       digitalWrite(red1, LOW);
       digitalWrite(red2, HIGH);
+      analogWrite(buzzer, 0);
     }
     else {
       state = HIGH;
       digitalWrite(red1, HIGH);
       digitalWrite(red2, LOW);
+      analogWrite(buzzer, 250);
     }
     counter = millis() + interval;
   }
