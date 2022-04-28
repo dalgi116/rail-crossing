@@ -51,7 +51,7 @@ void loop() {
 void blinkWhite(int interval) {
   digitalWrite(red1, LOW);
   digitalWrite(red2, LOW);
-  digitalWrite(buzzer, LOW);
+  noTone(buzzer);
   static unsigned long int counter;
   static bool state;
   
@@ -77,13 +77,15 @@ void blinkRed(int interval) {
       state = LOW;
       digitalWrite(red1, LOW);
       digitalWrite(red2, HIGH);
-      analogWrite(buzzer, 0);
+      //analogWrite(buzzer, 0);
+      noTone(buzzer);
     }
     else {
       state = HIGH;
       digitalWrite(red1, HIGH);
       digitalWrite(red2, LOW);
-      analogWrite(buzzer, 250);
+      //analogWrite(buzzer, 250);
+      tone(buzzer, 200);
     }
     counter = millis() + interval;
   }
